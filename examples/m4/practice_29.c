@@ -1,15 +1,3 @@
-<<<<<<< HEAD
-#include <stdio.h>
-
-int main(){
-
-    int first_value = 0,
-	second_value = 0;
-
-
-    
-
-=======
 #include<stdio.h>
 
 int sub_r( int, int );
@@ -33,7 +21,6 @@ int main(){
 
     printf( "The remainder of operation is: %d \n", remainder_result );
     printf( "The quotient of operation is:  %d \n", quotient_result );
->>>>>>> 2895afe2fba3fded303ff38b60aa8d2fc24823ce
 
     return 0;
 
