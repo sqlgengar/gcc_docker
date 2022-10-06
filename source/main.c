@@ -1,22 +1,38 @@
 #include <stdio.h>
 #define SIZE_MAX 3
 
-void charge_vec( int[] );
+int charge_vec( int[] );
 void add_elements( int[] );
+void find_min( int[] );
+float calc_avg( int[] );
+void value_g_avg( int[], float );
+void mult_l_element( int[], int );
+void max_values( int[] );
+int* value_odd( int[] );
+void value_not_odd( int[], int[] );
 
 int main(){
 
-	int vec[SIZE_MAX];
+	int vec[SIZE_MAX],
+		vec_odd[SIZE_MAX],
+		last_value;
+	float avg;
 
-	charge_vec( vec );
+	last_value = charge_vec( vec );
 	add_elements( vec );
+	find_min( vec );
+	avg = calc_avg( vec );
+	value_g_avg( vec, avg );
+	mult_l_element( vec, last_value );
+	max_values( vec );
+	vec_odd = value_odd( vec );
 
 	printf( "script done \n" );
 	return 0;
 
 }
 
-void charge_vec( int vec[] ){
+int charge_vec( int vec[] ){
 
 	int temp_value;
 
@@ -36,6 +52,8 @@ void charge_vec( int vec[] ){
 
 	}
 
+	return vec[SIZE_MAX-1];
+
 }
 
 void add_elements( int vec[] ){
@@ -49,5 +67,141 @@ void add_elements( int vec[] ){
 	}
 	
 	printf( "The add of elemets in vec is: %d \n", temp_add );
+
+}
+
+void find_min( int vec[] ){
+
+	int min;
+
+	min = vec[0];
+
+	for( int i = 1; i < SIZE_MAX; i++ ){
+		
+		if( vec[i] < min ){
+			
+			min = vec[i];
+
+		}
+
+	}
+
+	printf( "The min value in vec is: %d \n", min );
+	
+}
+
+float calc_avg( int vec[] ){
+
+	int temp_add = 0;
+	float temp_avg;
+
+	for( int i = 0; i < SIZE_MAX; i++ ){
+		
+		temp_add += vec[i];
+
+	}
+	
+	temp_avg = temp_add / ( SIZE_MAX - 1 ) * 1.0;
+
+	printf( "The avg of elemets in vec is: %f \n", temp_avg );
+
+	return temp_avg;
+
+}
+
+void value_g_avg( int vec[], float avg ){
+
+	for( int i = 0; i < SIZE_MAX; i++ ){
+		
+		if( vec[i] > avg ){
+			
+			printf( "%d is grated of the average \n", vec[i] );
+
+		}
+		
+	}
+	
+}
+
+void mult_l_element( int vec[], int last_value ){
+
+	for( int i = 0; i < SIZE_MAX; i++ ){
+		
+		if( ( vec[i] % last_value ) == 0 ){
+			
+			printf( "%d is multiple of %d \n", vec[i], last_value );
+
+		}
+		
+	}
+
+}
+
+void max_values( int vec[] ){
+
+	int max,
+		count_max = 0;
+
+	max = vec[0];
+
+	for( int i = 1; i < SIZE_MAX; i++ ){
+		
+		if( vec[i] > max ){
+			
+			max = vec[i];
+
+		}
+
+	}
+
+	for( int j = 0; j < SIZE_MAX; j++ ){
+		
+		if( vec[j] == max ){
+			
+			printf( "The max value %d in %d index \n", max, j );
+			count_max++;
+
+		}
+
+	}
+	
+	printf( "The count of max is: %d \n", count_max );
+
+}
+
+int* value_odd( int vec[] ){
+
+	int vec_odd = { 0, 0, 0 },
+		j = 0,
+		count_odd = 0;
+
+	for( int i = 0; i < SIZE_MAX; i++ ){
+	
+		if( ( vec[i] % 2 ) != 0 ){
+			
+			vec_odd[j] = vec[i];
+			j++;
+
+		}
+		
+	}
+
+	for( int k = 0; k < SIZE_MAX; k++ ){
+		
+		if( !vec_odd[k] ){
+
+			count_odd++;
+
+		}
+
+	}
+	
+	for( int l = 0; l < count_odd; l++ ){
+		
+		printf( "vec_odd[%d] => %d \d", l, vec_odd[l] );
+
+	}
+	
+	return vec_odd;
 
 }
