@@ -9,6 +9,9 @@ docker build -t gcc .
 docker run -itd --name gcc-env -v C:\Users\PC\Desktop\gcc_docker\source:/usr/src/app gcc
 docker run -itd --name gcc-env -v /root/gcc_docker/source:/usr/src/app gcc
 
+#levantar contenedor ya creado
+docker start gcc-env
+
 #ejecuta el script de bash para compilar main y ejecutar el binario
 docker exec -it gcc-env bash compile.sh
 

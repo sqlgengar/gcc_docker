@@ -1,39 +1,87 @@
 #include <stdio.h>
-#define COUNT_COND 4
-#define SIZE_H 20
+#include <stdlib.h>
+#define SIZE 3
 
-void show_histogram( char[][SIZE_H] );
+void insert_asc( int[] );
+//void insert_desc( int[] );
+//void insert_pos( int[] );
+void print_array( int[] );
 
 int main(){
 
-	char histogram[COUNT_COND][SIZE_H];
+	int 	array[SIZE],
+		value_option = 0;
 
-	for( int i = 0; i < COUNT_COND; i++ ){
+	printf( "Program for manipule vectors, please enter a option: \n" );
+	
 
-			printf( "enter a value to histogram: \n" );
-			fgets( histogram[i], SIZE_H, stdin );
-			fflush( stdin );
+	while( value_option != 4 ){
+		
+		printf( "1) Insert value ascendent \n" );
+		printf( "2) Insert value descendent \n" );
+		printf( "3) Insert value in particular position \n" );
+		printf( "4) Exit program \n" );
+
+		scanf( " %d", &value_option );
+		fflush( stdin );
+
+		switch( value_option ){
+
+			case 1:
+					insert_asc( array );
+					break;
+			case 2:
+					//insert_desc( array );
+					break;
+			case 3:
+					//insert_pos( array );
+					break;
+			case 4:
+					exit( EXIT_SUCCESS );//end program by user option
+					break;
+			default:
+					printf( "Value invalid for option \n" );
+					printf( "Please enter a value between 1-4: \n" );
+					break;
+		}
 
 	}
 
-	show_histogram( histogram );
-
-	printf( "script done \n" );
+	printf( "Script done \n" );
 	return 0;
 
 }
 
-void show_histogram( char histogram[][SIZE_H] ){
 
-	for( int i = 0; i < COUNT_COND; i++ ){
+void insert_asc( int array[SIZE] ){
 
-		printf( "Cond %d: %s", i+1, histogram[i] );
+	int temp;
+
+	printf( "Enter new value for the array \n" );
+	scanf( " %d", &temp );
+	fflush( stdin );
+	
+	for( int i = 0; i < SIZE; i++ ){
+
+		array[i+1] = array[i];
+
+	}
+
+	array[0] = temp;
+	print_array( array );
+
+}
+
+
+
+void print_array( int array[SIZE] ){
+
+	for( int i = 0; i < SIZE; i++ ){
+
+		printf( "array[%d] -> %d \n", i, array[i] );
 
 	}
 
 }
 
 
-//1: ***
-//2: **
-//Cond 1:
