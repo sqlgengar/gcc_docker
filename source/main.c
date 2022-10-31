@@ -2,6 +2,7 @@
 #define AMOUNT_YEARS 		2 //amount of years that program can load
 #define AMOUNT_MOUNTHS 		2 //amount of mounths that program can load
 #define AMOUNT_DAYS 		2 //amount of days that program can load, without logic of validate
+#define INDEX_SEPTEMBER 	1
 
 typedef struct{
 
@@ -13,14 +14,18 @@ typedef struct{
 void load_days( Days [AMOUNT_YEARS][AMOUNT_MOUNTHS][AMOUNT_DAYS] );
 void avg_presents( Days [AMOUNT_YEARS][AMOUNT_MOUNTHS][AMOUNT_DAYS] );
 void max_presents( Days [AMOUNT_YEARS][AMOUNT_MOUNTHS][AMOUNT_DAYS] );
+void avg_presents_sep( Days [AMOUNT_YEARS][AMOUNT_MOUNTHS][AMOUNT_DAYS] );
+void max_presents_years( Dyas [AMOUNT_YEARS][AMOUNT_MOUNTHS][AMOUNT_DAYS] );
 
 int main(){
 
 	Days date[AMOUNT_YEARS][AMOUNT_MOUNTHS][AMOUNT_DAYS];
 	
 	load_days( date );
-	avg_presents( date );
-	max_presents( data );
+	//avg_presents( date );
+	//max_presents( date );
+	//avg_presents_sep( date );
+	max_presents_years( date );
 
 	printf( "\n script done \n" );
 
@@ -68,8 +73,7 @@ void avg_presents( Days date_user[AMOUNT_YEARS][AMOUNT_MOUNTHS][AMOUNT_DAYS] ){
 
 	int 	index_year,
 	    	index_mounth,
-	    	sum_presents = 0,
-	    	sum_studens = 0;
+	    	sum_presents = 0;
 	float 	avg;
 
 	printf( "Enter a year for calc the average \n" );
@@ -83,7 +87,6 @@ void avg_presents( Days date_user[AMOUNT_YEARS][AMOUNT_MOUNTHS][AMOUNT_DAYS] ){
 	for( int d = 0; d < AMOUNT_DAYS; d++ ){
 
 		sum_presents 	+= date_user[index_year][index_mounth][d].presents;
-		sum_studens 	+= ( date_user[index_year][index_mounth][d].missings + date_user[index_year][index_mounth][d].presents );
 
 	}
 
@@ -95,9 +98,84 @@ void avg_presents( Days date_user[AMOUNT_YEARS][AMOUNT_MOUNTHS][AMOUNT_DAYS] ){
 
 void max_presents( Days date_user[AMOUNT_YEARS][AMOUNT_MOUNTHS][AMOUNT_DAYS] ){
 
-	int amount_presents = 0,
-
+	int max_day,
+	    index_year;
 		
+	printf( "Enter de year for look up the max presents \n" );
+	scanf( " %d", &index_year );
+	fflush( stdin );
 
+	for( int m = 0; m < AMOUNT_MOUNTHS; m++ ){
 
+		int amount_presents = 0;
 
+		for( int d = 0; d < AMOUNT_DAYS; d++ ){
+
+			if( date_user[index_year][m][d].presents > amount_presents ){
+
+				amount_presents += date_user[index_year][m][d].presents;
+				max_day = d;
+
+			}
+
+		}
+
+	}
+
+	printf( "The max day for presenteeism is %d \n", max_day );
+
+}
+
+void avg_presents_sep( Days date_user[AMOUNT_YEARS][AMOUNT_MOUNTHS][AMOUNT_DAYS] ){
+
+	int 	sum_presents = 0;
+	float 	avg;
+
+	for( int y = 0; y < AMOUNT_YEARS; y++ ){
+
+		for( int d = 0; d < AMOUNT_DAYS; d++ ){
+
+			sum_presents 	+= date_user[y][INDEX_SEPTEMBER][d].presents;
+
+		}
+
+		avg = sum_presents / ( AMOUNT_DAYS * 1.0 ); //correction by float divition
+
+		printf( "The average value for year %d, mounth september, is %.2f \n", y, avg );
+
+	}
+
+}
+
+void max_presents_years( Days date_user[AMOUNT_YEARS][AMOUNT_MOUNTHS][AMOUNT_DAYS] ){
+
+	int max_day;
+		
+	printf( "Enter de year for look up the max presents \n" );
+	scanf( " %d", &index_year );
+	fflush( stdin );
+
+	for( int y = 0; y < AMOUNT_YEARS; y++ ){
+
+		for( int m = 0; m < AMOUNT_MOUNTHS; m++ ){
+
+			int amount_presents = 0;
+
+			for( int d = 0; d < AMOUNT_DAYS; d++ ){
+
+				if( date_user[y][m][d].presents > amount_presents ){
+
+					amount_presents += date_user[y][m][d].presents;
+					max_day = d;
+
+				}
+
+			}
+
+		printf( "
+
+		}
+
+	printf( "The max day for presenteeism is %d \n", max_day );
+
+}
