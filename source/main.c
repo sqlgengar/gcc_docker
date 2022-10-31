@@ -172,10 +172,10 @@ void max_presents_years( Days date_user[AMOUNT_YEARS][AMOUNT_MOUNTHS][AMOUNT_DAY
 
 			}
 
-		printf( "
-
 		}
 
-	printf( "The max day for presenteeism is %d \n", max_day );
+	printf( "The the with max presenteeism is %d \n", max_day );
+
+	}
 
 }
